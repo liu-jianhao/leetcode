@@ -6,23 +6,19 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        vector<int> res;
-        if(nums.empty())
-            return res;
+        vector<int> res(2);
 
-        unordered_multimap<int, int> hash;
-        for(int i = 0; i < nums.size(); ++i)
-            hash.insert(make_pair(nums[i], i));
-
+        unordered_map<int, int> hash;
         for(int i = 0; i < nums.size(); ++i)
         {
             auto it = hash.find(target - nums[i]);
             if(it != hash.end() && it->second != i)
             {
-                res.push_back(i);
-                res.push_back(it->second);
+                res[0] = it->second;
+                res[1] = i;
                 break;
             }
+            hash.insert(make_pair(nums[i], i));
         }
 
         return res;
