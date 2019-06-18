@@ -32,12 +32,14 @@ public:
             auto cur = s.top();
             s.pop();
 
+            // 根节点最后插入
             if(cur.second == 1)
             {
                 res.push_back(cur.first->val);
                 continue;
             }
 
+            // 1说明此时为根节点
             s.push(make_pair(cur.first, 1));
             for(auto it = cur.first->children.rbegin(); it != cur.first->children.rend(); ++it)
             {
