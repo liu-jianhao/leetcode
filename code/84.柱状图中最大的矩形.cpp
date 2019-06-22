@@ -5,31 +5,21 @@
  */
 class Solution {
 public:
-    int largestRectangleArea(vector<int>& heights) {
-        int n = heights.size();
-        stack<int> s;
-        s.push(-1);
-        int i = 0;
-        int res = 0;
-        while(i < n)
+    int largestRectangleArea(vector<int> &heights)
+    {
+        heights.push_back(0);
+        stack<int> stk;
+        int maxArea = 0;
+        for (int i = 0; i < heights.size(); i++)
         {
-            while(s.top() != -1 && heights[s.top()] >= heights[i])
+            while (!stk.empty() && heights[i] < heights[stk.top()])
             {
-                int h = s.top();
-                s.pop();
-                res = max(res, heights[h] * (i - s.top() - 1));
+                int top = stk.top();
+                stk.pop();
+                maxArea = max(maxArea, heights[top] * (stk.empty() ? i : (i - stk.top() - 1)));
             }
-            s.push(i++);
+            stk.push(i);
         }
-
-        while(s.top() != -1)
-        {
-            int h = s.top();
-            s.pop();
-            res = max(res, heights[h] * (n - s.top() - 1));
-        }
-
-        return res;
+        return maxArea;
     }
 };
-
