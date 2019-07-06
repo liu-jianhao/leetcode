@@ -6,22 +6,20 @@
 class Solution {
 public:
     int mySqrt(int x) {
-        if(x == 0 || x == 1)
-            return x;
-        int low = 0, high = x, mid;
-        while(low <= high)
+        long long i = 0;
+        long long j = x / 2 + 1;
+        while(i <= j)
         {
-            mid = (low + high) / 2;
-            if(mid == x / mid)
+            long long mid = (i + j) / 2;
+            long long res = mid * mid;
+            if(res == x)
                 return mid;
-            else if(mid < x / mid && (mid+1) > x / (mid+1))
-                return mid;
-            else if(mid < x / mid)
-                low = mid + 1;
+            else if(res < x)
+                i = mid + 1;
             else
-                high = mid - 1;
+                j = mid - 1;
         }
-        return mid;
+        return j;
     }
 };
 

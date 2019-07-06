@@ -22,7 +22,7 @@ public:
                 else
                     stack.pop();
         }
-        return stack.empty() ? true : false;
+        return stack.empty();
     }
 };
 
