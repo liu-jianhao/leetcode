@@ -9,14 +9,11 @@ public:
         target = abs(target);
         int k = 0;
         int sum = 0;
-        while(sum < target)
+        while(sum < target || (sum >= target && ((sum - target) % 2 != 0 )))
+        {
             sum += (++k);
-        
-        const int d = sum - target;
-        if(d % 2 == 0)
-            return k;
-
-        return k + 1 + (k % 2);
+        }
+        return k; 
     }
 };
 
